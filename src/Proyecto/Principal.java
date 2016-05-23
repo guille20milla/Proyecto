@@ -3,19 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package proyectogit;
+package Proyecto;
+
+import Vista.Interfaz1;
 
 /**
  *
  * @author Alumno
  */
-public class ProyectoGit {
+public class Principal {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("Mi segundo guardado de commit");
+        Interfaz1 i = new Interfaz1();
     }
     
 }
