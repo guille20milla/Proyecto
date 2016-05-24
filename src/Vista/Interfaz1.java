@@ -73,7 +73,11 @@ public class Interfaz1 {
     public void comportamiento(ActionEvent e) {
         Object obj = e.getSource();
         if (obj == botonConectar) {
-            
+            /*if(){
+                Interfaz3 i3 = new Interfaz3();
+            }else{
+                Interfaz4 i4 = new Interfaz4();
+            }*/
         }
         else if(obj == botonRegistrar){
             Interfaz2 i2= new Interfaz2();
