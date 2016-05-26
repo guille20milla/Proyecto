@@ -25,14 +25,14 @@ import javax.swing.WindowConstants;
 public class Interfaz1 {
     JFrame frame;
     JPanel panel;
-    JButton botonConectar;
-    JButton botonRegistrar;
+    private JButton botonConectar;
+    private JButton botonRegistrar;
     JLabel nombre;
     JLabel contrasenna;
     JLabel pregunta;
     JLabel blanco;
-    JTextField Tnombre;
-    JPasswordField Tcontrasenia;
+    private JTextField Tnombre;
+    private JPasswordField Tcontrasenia;
     String servidor = "jdbc:mysql://localhost/";
     String bd = "BD";
     String usuario = "user";
@@ -48,8 +48,8 @@ public class Interfaz1 {
         Tcontrasenia = new JPasswordField(15);
         pregunta = new JLabel("           ¿No tienes cuenta?");
         blanco = new JLabel("");
-        botonConectar = crearBoton("Conectarse");
-        botonRegistrar= crearBoton("Registrarse");
+        botonConectar = new JButton ("Conectarse");
+        botonRegistrar= new JButton("Registrarse");
         panel.setLayout(new GridLayout(4,2,5,5));
         
         pregunta.setForeground(java.awt.Color.red);
@@ -70,33 +70,37 @@ public class Interfaz1 {
         frame.setVisible(true);
     }
 
-    public void comportamiento(ActionEvent e) {
-        Object obj = e.getSource();
-        if (obj == botonConectar) {
-            /*if(){
-                Interfaz3 i3 = new Interfaz3();
-            }else{
-                Interfaz4 i4 = new Interfaz4();
-            }*/
-        }
-        else if(obj == botonRegistrar){
-            Interfaz2 i2= new Interfaz2();
-        }
-        
+    public void addCalcularListener(ActionListener escucharBoton){
+        getBotonConectar().addActionListener(escucharBoton);
+        getBotonRegistrar().addActionListener(escucharBoton);
     }
-    public JButton crearBoton(String texto) {
-        JButton boton = new JButton(texto);
 
-        boton.addActionListener(
-                new ActionListener() {
-
-                    @Override
-                    public void actionPerformed(ActionEvent e
-                    ) {
-                        comportamiento(e);
-                    }
-                }
-        );
-        return boton;
+    /**
+     * @return the botonConectar
+     */
+    public JButton getBotonConectar() {
+        return botonConectar;
     }
+
+    /**
+     * @return the botonRegistrar
+     */
+    public JButton getBotonRegistrar() {
+        return botonRegistrar;
+    }
+
+    /**
+     * @return the Tnombre
+     */
+    public JTextField getTnombre() {
+        return Tnombre;
+    }
+
+    /**
+     * @return the Tcontrasenia
+     */
+    public JPasswordField getTcontrasenia() {
+        return Tcontrasenia;
+    }
+    
 }

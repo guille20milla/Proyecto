@@ -5,6 +5,7 @@
  */
 package Proyecto;
 
+import Controlador.ControladorI1;
 import Vista.*;
 
 /**
@@ -17,7 +18,8 @@ public class Principal {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Interfaz3 i = new Interfaz3();
+        Interfaz1 i = new Interfaz1();
+        ControladorI1 cip = new ControladorI1(i);
     }
     
 }

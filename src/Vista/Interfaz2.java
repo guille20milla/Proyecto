@@ -27,20 +27,20 @@ import javax.swing.WindowConstants;
  * @author Alumno
  */
 public class Interfaz2 {
-    JFrame frame;
+    private JFrame frame;
     JPanel panel;
-    JButton botonCancelar;
-    JButton botonRegistrar;
+    private JButton botonCancelar;
+    private JButton botonRegistrar;
     JLabel nombre;
     JLabel apellido;
     JLabel contrasenna;
     JLabel categoria;
     JLabel contrasenna2;
-    JTextField Tnombre;
-    JPasswordField Tcontrasenia;
-    JTextField Tapellido;
-    JPasswordField Tcontrasenia2;
-    JComboBox Tcategoria;
+    private JTextField Tnombre;
+    private JPasswordField Tcontrasenia;
+    private JTextField Tapellido;
+    private JPasswordField Tcontrasenia2;
+    private JComboBox Tcategoria;
     public String [] categorias = new String[2];
     String servidor = "jdbc:mysql://localhost/";
     String bd = "BD";
@@ -63,8 +63,8 @@ public class Interfaz2 {
         Tapellido = new JTextField(15);
         Tcontrasenia = new JPasswordField(15);
         Tcontrasenia2 = new JPasswordField(15);
-        botonCancelar = crearBoton("Cancelar");
-        botonRegistrar= crearBoton("Registrar");
+        botonCancelar = new JButton("Cancelar");
+        botonRegistrar= new JButton("Registrar");
         panel.setLayout(new GridLayout(6,2,5,5));
         
         panel.add(nombre);
@@ -87,30 +87,65 @@ public class Interfaz2 {
         frame.setVisible(true);
     }
 
-    public void comportamiento(ActionEvent e) {
-        Object obj = e.getSource();
-        if (obj == botonCancelar) {
-            
-        }
-        else if(obj == botonRegistrar){
-            //Interfaz3 i3= new Interfaz3();
-        }
-        
+    public void addCalcularListener(ActionListener escucharBoton){
+        getBotonCancelar().addActionListener(escucharBoton);
+        getBotonRegistrar().addActionListener(escucharBoton);
     }
-    public JButton crearBoton(String texto) {
-        JButton boton = new JButton(texto);
 
-        boton.addActionListener(
-                new ActionListener() {
+    /**
+     * @return the botonCancelar
+     */
+    public JButton getBotonCancelar() {
+        return botonCancelar;
+    }
 
-                    @Override
-                    public void actionPerformed(ActionEvent e
-                    ) {
-                        comportamiento(e);
-                    }
-                }
-        );
-        return boton;
+    /**
+     * @return the botonRegistrar
+     */
+    public JButton getBotonRegistrar() {
+        return botonRegistrar;
+    }
+
+    /**
+     * @return the Tnombre
+     */
+    public JTextField getTnombre() {
+        return Tnombre;
+    }
+
+    /**
+     * @return the Tcontrasenia
+     */
+    public JPasswordField getTcontrasenia() {
+        return Tcontrasenia;
+    }
+
+    /**
+     * @return the Tapellido
+     */
+    public JTextField getTapellido() {
+        return Tapellido;
+    }
+
+    /**
+     * @return the Tcontrasenia2
+     */
+    public JPasswordField getTcontrasenia2() {
+        return Tcontrasenia2;
+    }
+
+    /**
+     * @return the Tcategoria
+     */
+    public JComboBox getTcategoria() {
+        return Tcategoria;
+    }
+
+    /**
+     * @return the frame
+     */
+    public JFrame getFrame() {
+        return frame;
     }
     
 }

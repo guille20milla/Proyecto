@@ -5,7 +5,13 @@
  */
 package Vista;
 
+import com.toedter.calendar.JCalendar;
+import com.toedter.calendar.JDateChooser;
+import java.awt.Component;
+import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.util.Date;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -30,6 +36,8 @@ public class Interfaz3 {
     JComboBox Tpresi;
     JLabel direc;
     JComboBox Tdirec;
+    JLabel precioEntrada;
+    JTextField TprecioEntrada;
     JButton btnaniadir;
     JButton btncancelar;
     JPanel panel2;
@@ -42,10 +50,12 @@ public class Interfaz3 {
     JButton btnaceptarDirec;
     JPanel panel4;
     JLabel nombreEquipo;
-    JTextField TnombreEquipo;
+    JComboBox TnombreEquipo;
     JLabel fecha;
-    JCalendar Tfecha;
+    JDateChooser Tfecha;
     JLabel precio;
+    JLabel Tprecio;
+    JButton aceptarVenta;
     JTabbedPane pestañas;
     
     public Interfaz3(){
@@ -55,8 +65,11 @@ public class Interfaz3 {
         panel3= new JPanel();
         panel4= new JPanel();
         pestañas= new JTabbedPane();
+        ImageIcon escudo = new ImageIcon("fotoEscudo.gif");
+        ImageIcon escudoTachado = new ImageIcon("fotoEscudoTachado.gif");
         
-        panel1.setLayout(new GridLayout(5,2,5,5));
+        panel1.setLayout(new GridLayout(6,2,5,5));
+        panel1.setSize(100,100);
         nombre = new JLabel("Nombre");
         Tnombre = new JTextField(15);
         telefono = new JLabel("Telefono");
@@ -65,6 +78,8 @@ public class Interfaz3 {
         Tpresi=new JComboBox();
         direc = new JLabel("Director de Marketing");
         Tdirec=new JComboBox();
+        precioEntrada = new JLabel("Precio entradas");
+        TprecioEntrada = new JTextField(15);
         btnaniadir = new JButton("Añadir");
         btncancelar = new JButton("Cancelar");
         
@@ -76,6 +91,8 @@ public class Interfaz3 {
         panel1.add(Tpresi);
         panel1.add(direc);
         panel1.add(Tdirec);
+        panel1.add(precioEntrada);
+        panel1.add(TprecioEntrada);
         panel1.add(btnaniadir);
         panel1.add(btncancelar);
         
@@ -88,10 +105,23 @@ public class Interfaz3 {
         panel2.add(Tequipo);
         panel2.add(btnaceptarEquipo);
         
-        panel3.setLayout(new GridLayout(5,2,5,5));
+        panel3.setLayout(new GridLayout(5,3,5,5));
         nombreEquipo = new JLabel("Nombre equipo");
-        TnombreEquipo = new JTextField(15);
+        TnombreEquipo = new JComboBox();
         fecha = new JLabel("Fecha");
+        Tfecha= new JDateChooser("yyyy/MM/dd", "####/##/##", '_');
+        precio = new JLabel("Precio");
+        Tprecio = new JLabel();
+        aceptarVenta = new JButton("Vender");
+        
+        
+        panel3.add(nombreEquipo);
+        panel3.add(TnombreEquipo);
+        panel3.add(fecha);
+        panel3.add(Tfecha);
+        panel3.add(precio);
+        panel3.add(Tprecio);
+        panel3.add(aceptarVenta);
         
         panel4.setLayout(new GridLayout(5,2,5,5));
         direc2 = new JLabel("Elegir director: ");
@@ -103,8 +133,8 @@ public class Interfaz3 {
         panel4.add(btnaceptarDirec);
         
         
-        pestañas.addTab("Alta equipo", panel1);
-        pestañas.addTab("Baja equipo", panel2);
+        pestañas.addTab("Alta equipo",escudo, panel1);
+        pestañas.addTab("Baja equipo",escudoTachado, panel2);
         pestañas.addTab("Vender entrada", panel3);
         pestañas.addTab("Modificar director", panel4);
         
@@ -115,8 +145,15 @@ public class Interfaz3 {
         
         
         frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-        frame.setSize(600, 300);
+        frame.setSize(700, 300);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+    }
+
+    /**
+     * @return the Tfecha
+     */
+    public Date getTfecha() {
+        return Tfecha.getDate();
     }
 }
