@@ -147,6 +147,41 @@ public class Interfaz2 {
     public JFrame getFrame() {
         return frame;
     }
+
+    /**
+     * @param Tnombre the Tnombre to set
+     */
+    public void setTnombre(JTextField Tnombre) {
+        this.Tnombre = Tnombre;
+    }
+
+    /**
+     * @param Tcontrasenia the Tcontrasenia to set
+     */
+    public void setTcontrasenia(JPasswordField Tcontrasenia) {
+        this.Tcontrasenia = Tcontrasenia;
+    }
+
+    /**
+     * @param Tapellido the Tapellido to set
+     */
+    public void setTapellido(JTextField Tapellido) {
+        this.Tapellido = Tapellido;
+    }
+
+    /**
+     * @param Tcontrasenia2 the Tcontrasenia2 to set
+     */
+    public void setTcontrasenia2(JPasswordField Tcontrasenia2) {
+        this.Tcontrasenia2 = Tcontrasenia2;
+    }
+
+    /**
+     * @param Tcategoria the Tcategoria to set
+     */
+    public void setTcategoria(JComboBox Tcategoria) {
+        this.Tcategoria = Tcategoria;
+    }
     
 }
 
