@@ -9,6 +9,8 @@ import Vista.*;
 import Modelo.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 
@@ -46,14 +48,20 @@ public class ControladorI2 {
                 if (!datosRellenos()) {
                     JOptionPane.showMessageDialog(i2.getFrame(), "Faltan por meter datos", "Error insertar", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    if (!comprobarContraseñas()) {
-                        JOptionPane.showMessageDialog(i2.getFrame(), "Las contraseñas no coinciden", "Error contraseñas", JOptionPane.ERROR_MESSAGE);
+                    if (!contraseñaCorrecta()) {
+                        JOptionPane.showMessageDialog(i2.getFrame(), "La contraseña no es correcta,deberá empezar por una o "
+                                + "varias mayúsculas, dos minúsculas, 0 o más caracteres alfanuméricos, 2 o más"
+                                + " dígitos y terminar con el símbolo del dólar.Además por lo menos debe tener 8 caracteres.", "Error contraseña", JOptionPane.ERROR_MESSAGE);
                     } else {
-                        String cat = String.valueOf(i2.getTcategoria().getSelectedItem());
-                        String pass = new String(i2.getTcontrasenia().getPassword());
-                        Persona persona = new Persona(i2.getTnombre().getText(), i2.getTapellido().getText(), cat, pass);
-                        AccesoBase.crearPersona(persona, bd);
-                        JOptionPane.showMessageDialog(i2.getFrame(), "Persona insertada", "Insertado", JOptionPane.INFORMATION_MESSAGE);
+                        if (!comprobarContraseñas()) {
+                            JOptionPane.showMessageDialog(i2.getFrame(), "Las contraseñas no coinciden", "Error contraseñas", JOptionPane.ERROR_MESSAGE);
+                        } else {
+                            String cat = String.valueOf(i2.getTcategoria().getSelectedItem());
+                            String pass = new String(i2.getTcontrasenia().getPassword());
+                            Persona persona = new Persona(i2.getTnombre().getText(), i2.getTapellido().getText(), cat, pass);
+                            AccesoBase.crearPersona(persona, bd);
+                            JOptionPane.showMessageDialog(i2.getFrame(), "Persona insertada", "Insertado", JOptionPane.INFORMATION_MESSAGE);
+                        }
                     }
                 }
             }
@@ -76,7 +84,8 @@ public class ControladorI2 {
         }
         return estado;
     }
-    public void vaciar(){
+
+    public void vaciar() {
         i2.getTnombre().setText("");
         i2.getTapellido().setText("");
         i2.getTcontrasenia().setText("");
@@ -90,8 +99,19 @@ public class ControladorI2 {
         c2 = new String(i2.getTcontrasenia2().getPassword());
         if (c1.contentEquals(c2)) {
             estado = true;
-        } else {
-            estado = false;
+        }
+        return estado;
+    }
+
+    public boolean contraseñaCorrecta() {
+        boolean estado = false;
+        String p = "[A-Z]+[a-z]{2}\\w*\\d{2,}\\$";
+        String c1;
+        c1 = new String(i2.getTcontrasenia().getPassword());
+        Pattern p1 = Pattern.compile(p);
+        Matcher m = p1.matcher(c1);
+        if (m.matches() && c1.length()>7) {
+            estado = true;
         }
         return estado;
     }

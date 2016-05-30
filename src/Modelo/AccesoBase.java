@@ -15,8 +15,9 @@ import java.sql.SQLException;
  * @author Alumno
  */
 public class AccesoBase {
+
     BaseDeDatos bd = new BaseDeDatos();
-    
+
     public static int obtenerIdPersona(Persona p, BaseDeDatos bd) {
         CallableStatement cs;
         ResultSet rs;
@@ -40,22 +41,25 @@ public class AccesoBase {
         return id;
     }
 
-    public static String obtenerCategoria(int id, BaseDeDatos bd) {
+    public static String obtenerCategoria(String nombre, String contrasenia, BaseDeDatos bd) {
         CallableStatement cs;
-        ResultSet rs;
+        ResultSet rs = null;
         String categoria = "";
+        bd.abrirConexion();
 
         try {
-            cs = bd.getConexion().prepareCall("{call obtenercategoria(?)}");
-            cs.setInt(1, id);
-
+            cs = bd.getConexion().prepareCall("{call obtenerCategoria(?,?)}");
+            cs.setString(1, nombre);
+            cs.setString(2, contrasenia);
             rs = cs.executeQuery();
-
-            categoria = rs.getString(4);
+            while (rs.next()) {
+                categoria = rs.getString(1);
+            }
 
         } catch (SQLException sqle) {
             System.out.println(sqle.getMessage());
         }
+        bd.cerrarConexion();
 
         return categoria;
     }

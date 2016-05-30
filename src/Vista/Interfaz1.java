@@ -23,7 +23,7 @@ import javax.swing.WindowConstants;
  * @author Alumno
  */
 public class Interfaz1 {
-    JFrame frame;
+    private JFrame frame;
     JPanel panel;
     private JButton botonConectar;
     private JButton botonRegistrar;
@@ -101,6 +101,13 @@ public class Interfaz1 {
      */
     public JPasswordField getTcontrasenia() {
         return Tcontrasenia;
+    }
+
+    /**
+     * @return the frame
+     */
+    public JFrame getFrame() {
+        return frame;
     }
     
 }
