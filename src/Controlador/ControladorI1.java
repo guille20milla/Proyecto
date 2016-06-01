@@ -48,7 +48,7 @@ public class ControladorI1 {
                     ControladorI3 ci3 = new ControladorI3(i3);
                 } else if (cat.contentEquals("Director Comercial")) {
                     Interfaz4 i4 = new Interfaz4();
-                    //ControladorI4 ci4 = new ControladorI4(i4);
+                    ControladorI4 ci4 = new ControladorI4(i4);
                 } else {
                     JOptionPane.showMessageDialog(i1.getFrame(), "El usuario o la contraseña no existen", "Error identificacion", JOptionPane.ERROR_MESSAGE);
                 }

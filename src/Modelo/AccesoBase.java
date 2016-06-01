@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -18,7 +19,67 @@ import java.util.ArrayList;
  */
 public class AccesoBase {
 
-    static BaseDeDatos  bd = new BaseDeDatos();
+    static BaseDeDatos bd = new BaseDeDatos();
+
+    public static ResultSet consultaTablaEquipos() {
+        ResultSet rs = null;
+        PreparedStatement consul;
+        bd.abrirConexion();
+        try {
+
+            consul = bd.getConexion().prepareStatement("select e.Id_equipo,e.nombre,e.telefono,concat(p.nombre,\" \",p.apellido),concat(p1.nombre,\" \",p1.apellido),e.precio from equipo e,persona p,persona p1 where e.presidente=p.Id_persona and e.director=p1.Id_persona;");
+
+            rs = consul.executeQuery();
+            
+
+        } catch (SQLException sqle) {
+            System.out.println(sqle.getMessage());
+
+        }
+        
+        return rs;
+        
+    }
+    
+    public static ResultSet consultaTablaPersonas() {
+        ResultSet rs = null;
+        PreparedStatement consul;
+        bd.abrirConexion();
+        try {
+
+            consul = bd.getConexion().prepareStatement("SELECT * FROM persona");
+
+            rs = consul.executeQuery();
+            
+
+        } catch (SQLException sqle) {
+            System.out.println(sqle.getMessage());
+
+        }
+        
+        return rs;
+        
+    }
+    
+    public static ResultSet consultaTablaVentas() {
+        ResultSet rs = null;
+        PreparedStatement consul;
+        bd.abrirConexion();
+        try {
+
+            consul = bd.getConexion().prepareStatement("select v.Id_venta,e.nombre \"Nombre equipo\",fecha from ventas v, equipo e where e.Id_equipo=v.Id_equipo;");
+
+            rs = consul.executeQuery();
+            
+
+        } catch (SQLException sqle) {
+            System.out.println(sqle.getMessage());
+
+        }
+        
+        return rs;
+        
+    }
 
     public static String[] consultaNombrePresi() {
         String[] nombres = null;
@@ -73,7 +134,7 @@ public class AccesoBase {
         bd.cerrarConexion();
         return nombres;
     }
-    
+
     public static String[] consultaEquipos() {
         String[] nombres = null;
         ResultSet rs;
@@ -100,8 +161,8 @@ public class AccesoBase {
         bd.cerrarConexion();
         return nombres;
     }
-    
-    public static int obtenerPrecio(String nombre){
+
+    public static int obtenerPrecio(String nombre) {
         CallableStatement cs;
         ResultSet rs;
         int precio = 0;
@@ -121,8 +182,8 @@ public class AccesoBase {
         bd.cerrarConexion();
         return precio;
     }
-    
-    public static void modificarDirector(String nombre,int id) {
+
+    public static void modificarDirector(String nombre, int id) {
         CallableStatement cs;
         bd.abrirConexion();
         try {
@@ -131,7 +192,7 @@ public class AccesoBase {
             cs.setInt(2, id);
 
             cs.execute();
-            
+
         } catch (SQLException sqle) {
             System.out.println(sqle.getMessage());
 
@@ -160,7 +221,7 @@ public class AccesoBase {
         bd.cerrarConexion();
         return id;
     }
-    
+
     public static int obtenerIdEquipo(String nombre) {
         CallableStatement cs;
         ResultSet rs;
@@ -241,7 +302,7 @@ public class AccesoBase {
         }
         bd.cerrarConexion();
     }
-    
+
     public static void eliminarEquipo(String nombre) {
         CallableStatement cs;
         bd.abrirConexion();
@@ -256,7 +317,7 @@ public class AccesoBase {
         }
         bd.cerrarConexion();
     }
-    
+
     public static void crearEVenta(Venta v) {
         CallableStatement cs;
         bd.abrirConexion();
@@ -272,4 +333,5 @@ public class AccesoBase {
         }
         bd.cerrarConexion();
     }
+
 }
