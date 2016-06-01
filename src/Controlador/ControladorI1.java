@@ -42,16 +42,18 @@ public class ControladorI1 {
             if (obj == i1.getBotonConectar()) {
                 String pass = new String(i1.getTcontrasenia().getPassword());
                 String cat;
-                cat=AccesoBase.obtenerCategoria(i1.getTnombre().getText(),pass, bd);
-                if(cat.contentEquals("Presidente")){
+                cat = AccesoBase.obtenerCategoria(i1.getTnombre().getText(), pass);
+                if (cat.contentEquals("Presidente")) {
                     Interfaz3 i3 = new Interfaz3();
                     ControladorI3 ci3 = new ControladorI3(i3);
-                }else if(cat.contentEquals("Director Comercial")){
+                } else if (cat.contentEquals("Director Comercial")) {
                     Interfaz4 i4 = new Interfaz4();
                     //ControladorI4 ci4 = new ControladorI4(i4);
-                }else{
-                JOptionPane.showMessageDialog(i1.getFrame(), "El usuario o la contraseña no existen", "Error identificacion", JOptionPane.ERROR_MESSAGE);
-            }
+                } else {
+                    JOptionPane.showMessageDialog(i1.getFrame(), "El usuario o la contraseña no existen", "Error identificacion", JOptionPane.ERROR_MESSAGE);
+                }
+                i1.getTnombre().setText("");
+                i1.getTcontrasenia().setText("");
             } else {
                 if (obj == i1.getBotonRegistrar()) {
                     Interfaz2 i2 = new Interfaz2();

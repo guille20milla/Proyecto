@@ -15,8 +15,8 @@ import java.sql.SQLException;
  */
 public class BaseDeDatos {
     private String bd= "baseproyecto";
-    private String usuario= "root";//user
-    private String contrasenia= "";//1234
+    private String usuario= "user";//root
+    private String contrasenia= "1234";//1234
     private String servidor="jdbc:mysql://localhost/";
     private Connection conexion;
     

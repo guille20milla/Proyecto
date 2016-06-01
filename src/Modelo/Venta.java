@@ -5,36 +5,34 @@
  */
 package Modelo;
 
+import java.sql.Date;
+
 /**
  *
  * @author Alumno
  */
 public class Venta {
-    private int id_entrada;
+    private int id_equipo;
     private int id_venta;
-    private int dia;
-    private int mes;
-    private int anio;
+    private Date fecha;
     
-    public Venta(int i,int d, int m,int a){
-        this.id_entrada=i;
-        this.dia=d;
-        this.mes=m;
-        this.anio=a;
+    public Venta(int i,Date fecha){
+        this.id_equipo=i;
+        this.fecha=fecha;
     }
 
     /**
      * @return the id_entrada
      */
-    public int getId_entrada() {
-        return id_entrada;
+    public int getId_equipo() {
+        return id_equipo;
     }
 
     /**
      * @param id_entrada the id_entrada to set
      */
-    public void setId_entrada(int id_entrada) {
-        this.id_entrada = id_entrada;
+    public void setId_entrada(int id_equipo) {
+        this.id_equipo = id_equipo;
     }
 
     /**
@@ -50,46 +48,10 @@ public class Venta {
     public void setId_venta(int id_venta) {
         this.id_venta = id_venta;
     }
-
     /**
-     * @return the dia
+     * @return the fecha
      */
-    public int getDia() {
-        return dia;
-    }
-
-    /**
-     * @param dia the dia to set
-     */
-    public void setDia(int dia) {
-        this.dia = dia;
-    }
-
-    /**
-     * @return the mes
-     */
-    public int getMes() {
-        return mes;
-    }
-
-    /**
-     * @param mes the mes to set
-     */
-    public void setMes(int mes) {
-        this.mes = mes;
-    }
-
-    /**
-     * @return the anio
-     */
-    public int getAnio() {
-        return anio;
-    }
-
-    /**
-     * @param anio the anio to set
-     */
-    public void setAnio(int anio) {
-        this.anio = anio;
+    public Date getFecha() {
+        return fecha;
     }
 }

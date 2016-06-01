@@ -5,6 +5,8 @@
  */
 package Vista;
 
+import Modelo.AccesoBase;
+import Modelo.BaseDeDatos;
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
 import java.awt.Component;
@@ -47,6 +49,10 @@ public class Interfaz3 {
     private JComboBox Tequipo;
     private JButton btnaceptarEquipo;
     JPanel panel3;
+    JLabel vacio;
+    JLabel equipo2;
+    private JComboBox Tequipo2;
+    private JButton seleccionEquipo;
     JLabel direc2;
     private JComboBox Tdirec2;
     private JButton btnaceptarDirec;
@@ -56,9 +62,10 @@ public class Interfaz3 {
     JLabel fecha;
     private JDateChooser Tfecha;
     JLabel precio;
-    JLabel Tprecio;
+    private JLabel Tprecio;
     private JButton aceptarVenta;
     JTabbedPane pestañas;
+    BaseDeDatos bd = new BaseDeDatos();
 
     public Interfaz3() {
         frame = new JFrame();
@@ -79,9 +86,9 @@ public class Interfaz3 {
         telefono = new JLabel("Telefono");
         Ttelefono = new JTextField(15);
         presi = new JLabel("Presidente");
-        Tpresi = new JComboBox();
+        Tpresi = new JComboBox(AccesoBase.consultaNombrePresi());
         direc = new JLabel("Director de Marketing");
-        Tdirec = new JComboBox();
+        Tdirec = new JComboBox(AccesoBase.consultaNombreDirector());
         precioEntrada = new JLabel("Precio entradas");
         TprecioEntrada = new JTextField(15);
         btnaniadir = new JButton("Añadir");
@@ -102,16 +109,18 @@ public class Interfaz3 {
 
         panel2.setLayout(new GridLayout(5, 2, 5, 5));
         equipo = new JLabel("Elegir equipo: ");
-        Tequipo = new JComboBox();
+        Tequipo = new JComboBox(AccesoBase.consultaEquipos());
         btnaceptarEquipo = new JButton("Aceptar");
 
         panel2.add(equipo);
         panel2.add(Tequipo);
         panel2.add(btnaceptarEquipo);
 
-        panel3.setLayout(new GridLayout(5, 3, 5, 5));
+        panel3.setLayout(new GridLayout(5, 4, 5, 5));
+        vacio=new JLabel();
         nombreEquipo = new JLabel("Nombre equipo");
-        TnombreEquipo = new JComboBox();
+        TnombreEquipo = new JComboBox(AccesoBase.consultaEquipos());
+        seleccionEquipo=new JButton("Seleccionar");
         fecha = new JLabel("Fecha");
         Tfecha = new JDateChooser("dd/MM/yyyy", "##/##/####", '*');
         precio = new JLabel("Precio");
@@ -120,6 +129,8 @@ public class Interfaz3 {
 
         panel3.add(nombreEquipo);
         panel3.add(TnombreEquipo);
+        panel3.add(vacio);
+        panel3.add(seleccionEquipo);
         panel3.add(fecha);
         panel3.add(Tfecha);
         panel3.add(precio);
@@ -127,10 +138,14 @@ public class Interfaz3 {
         panel3.add(aceptarVenta);
 
         panel4.setLayout(new GridLayout(5, 2, 5, 5));
+        equipo2 = new JLabel("Elige equipo");
+        Tequipo2 = new JComboBox(AccesoBase.consultaEquipos());
         direc2 = new JLabel("Elegir director: ");
-        Tdirec2 = new JComboBox();
+        Tdirec2 = new JComboBox(AccesoBase.consultaNombreDirector());
         btnaceptarDirec = new JButton("Aceptar");
 
+        panel4.add(equipo2);
+        panel4.add(Tequipo2);
         panel4.add(direc2);
         panel4.add(Tdirec2);
         panel4.add(btnaceptarDirec);
@@ -154,6 +169,7 @@ public class Interfaz3 {
         getBtnaceptarEquipo().addActionListener(escucharBoton);
         getBtnaceptarDirec().addActionListener(escucharBoton);
         getAceptarVenta().addActionListener(escucharBoton);
+        getSeleccionEquipo().addActionListener(escucharBoton);
     }
 
     /**
@@ -259,5 +275,26 @@ public class Interfaz3 {
      */
     public JButton getAceptarVenta() {
         return aceptarVenta;
+    }
+
+    /**
+     * @return the Tequipo2
+     */
+    public JComboBox getTequipo2() {
+        return Tequipo2;
+    }
+
+    /**
+     * @return the Tprecio
+     */
+    public JLabel getTprecio() {
+        return Tprecio;
+    }
+
+    /**
+     * @return the seleccionEquipo
+     */
+    public JButton getSeleccionEquipo() {
+        return seleccionEquipo;
     }
 }
