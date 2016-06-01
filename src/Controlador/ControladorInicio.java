@@ -58,7 +58,8 @@ public class ControladorInicio {
                 t.setVisible(true);
                 t.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             }else{
-                
+                InterfazConsulta i = new InterfazConsulta();
+                ControladorConsulta c = new ControladorConsulta(i);
             }
 
         }

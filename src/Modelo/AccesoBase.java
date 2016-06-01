@@ -7,6 +7,7 @@ package Modelo;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -332,6 +333,51 @@ public class AccesoBase {
             System.out.println(sqle.getMessage());
         }
         bd.cerrarConexion();
+    }
+    
+    public static int consultaTotal(Date f,Date f1) {
+        CallableStatement cs;
+        ResultSet rs;
+        int precio = 0;
+        bd.abrirConexion();
+        try {
+            cs = bd.getConexion().prepareCall("{call consultaTotal(?,?)}");
+            cs.setDate(1, f);
+            cs.setDate(2, f1);
+            
+            rs = cs.executeQuery();
+            while (rs.next()) {
+                precio = rs.getInt(1);
+            }
+        } catch (SQLException sqle) {
+            System.out.println(sqle.getMessage());
+
+        }
+        bd.cerrarConexion();
+        return precio;
+    }
+    
+    public static int consultaTotalEquipo(int id, Date f,Date f1) {
+        CallableStatement cs;
+        ResultSet rs;
+        int precio = 0;
+        bd.abrirConexion();
+        try {
+            cs = bd.getConexion().prepareCall("{call consultaTotalEquipo(?,?,?)}");
+            cs.setInt(1, id);
+            cs.setDate(2, f);
+            cs.setDate(3, f1);
+            
+            rs = cs.executeQuery();
+            while (rs.next()) {
+                precio = rs.getInt(1);
+            }
+        } catch (SQLException sqle) {
+            System.out.println(sqle.getMessage());
+
+        }
+        bd.cerrarConexion();
+        return precio;
     }
 
 }
